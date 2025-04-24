@@ -14,6 +14,10 @@ def create_app():
 
     db.init_app(app)
 
+    CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+
+    from .routes import book_bp
+    app.register_blueprint(book_bp)
 
     with app.app_context():
         db.create_all()
